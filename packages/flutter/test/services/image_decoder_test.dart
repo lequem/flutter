@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,14 +10,13 @@ import 'package:flutter/http.dart' as http;
 
 void main() {
 
-  ImageInfo imageloaded;
+  Completer<ImageInfo> completer = new Completer<ImageInfo>();
   void handleImageChanged(ImageInfo imageInfo, bool synchronousCall) {
-    imageloaded = imageInfo;
+    completer.complete(imageInfo);
   }
 
-  Future<ImageInfo> isloaded() async {
-    while(imageloaded == null) {};
-    return imageloaded;
+  Future<ImageInfo> isloaded() {
+    return completer.future;
   }
 
   //transparent png
