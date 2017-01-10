@@ -26,10 +26,8 @@ void main() {
       0x42,0x60,0x82];
 
   test('decodeImageFromList call', () async {
-
     ui.Image image  = await decodeImageFromList(new Uint8List.fromList(bytes));
     expect(image != null, true);
-
   });
 
   testWidgets('ImageNetwork call', (WidgetTester tester) async {
@@ -45,7 +43,6 @@ void main() {
     NetworkImage networkImage = new NetworkImage('fakeurl');
     ImageStreamCompleter completer = networkImage.load(networkImage);
     completer.addListener(handleImageChanged);
-    await tester.pump();
     ImageInfo info = await isloaded();
     expect(info != null, true);
   });
